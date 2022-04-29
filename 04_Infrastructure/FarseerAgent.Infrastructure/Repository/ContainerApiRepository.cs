@@ -18,12 +18,13 @@ public class ContainerApiRepository : IContainerApiRepository
         var listContainers = await client.Containers.ListContainersAsync(new ContainersListParameters());
         foreach (var container in listContainers)
         {
+            Console.WriteLine($"{container == null}");
             Console.WriteLine($"{container.ID}");
             Console.WriteLine($"{container.Names[0]}");
             // 元数据
             Console.WriteLine("元数据");
             var inspectContainerAsync = await client.Containers.InspectContainerAsync(container.ID);
-            
+
             // 容器IP
             Console.WriteLine("容器IP");
             inspectContainerAsync.NetworkSettings.Networks.TryGetValue("net", out var networks);
@@ -47,7 +48,7 @@ public class ContainerApiRepository : IContainerApiRepository
                     Name = k8sName ?? container.Names.FirstOrDefault().Substring(1)
                 },
                 Env = inspectContainerAsync.Config.Env?.ToDictionary(o => o.Split('=')[0],
-                                                                    o => o.Split('=')[1]),
+                                                                     o => o.Split('=')[1]),
             };
         }
     }
