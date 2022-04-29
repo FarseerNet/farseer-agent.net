@@ -1,5 +1,8 @@
-﻿using FarseerAgent.Domain.LogCollect;
+﻿using FarseerAgent.Application.LogCollect.Entity;
+using FarseerAgent.Domain.LogCollect;
+using FarseerAgent.Domain.LogCollect.Container;
 using FS.Modules;
+using Mapster;
 
 namespace FarseerAgent.Application;
 
@@ -19,5 +22,6 @@ public class ApplicationModule : FarseerModule
     public override void Initialize()
     {
         IocManager.RegisterAssemblyByConvention(type: GetType());
+        TypeAdapterConfig<ContainerDTO, ContainerDO>.NewConfig().Unflattening(true);
     }
 }

@@ -4,6 +4,7 @@ using FarseerAgent.Domain.LogCollect.Container.Repository;
 using FarseerAgent.Domain.LogCollect.ContainerLog;
 using FS.DI;
 using FS.Extends;
+using Mapster;
 
 namespace FarseerAgent.Application.LogCollect;
 
@@ -16,7 +17,14 @@ public class LogCollectApp : ISingletonDependency
     /// <summary>
     ///    查找未采集日志的容器
     /// </summary>
-    public Task<List<ContainerDTO>> FindNewContainerAsync() => ContainerService.FindNewContainerAsync().MapAsync<ContainerDTO, ContainerDO>(ContainerDTO.Do2DtoRule);
+    public async IAsyncEnumerable<ContainerDTO> FindNewContainerAsync()
+    {
+        //return ContainerService.FindNewContainerAsync().Adapt<Task<List<ContainerDTO>>>();
+        await foreach (var containerDO in ContainerService.FindNewContainerAsync())
+        {
+            yield return containerDO.Adapt<ContainerDTO>();
+        }
+    }
 
     /// <summary>
     /// 读取容器中的日志

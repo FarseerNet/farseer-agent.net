@@ -1,13 +1,15 @@
-﻿using FarseerAgent.Infrastructure.Repository.Queue;
+﻿using FarseerAgent.Domain.LogCollect.Container;
+using FarseerAgent.Domain.LogCollect.ContainerLog;
+using FarseerAgent.Infrastructure.Repository.ContainerLog.Model;
+using FarseerAgent.Infrastructure.Repository.Queue;
 using FS.ElasticSearch;
-using FS.EventBus;
-using FS.Mapper;
 using FS.Modules;
 using FS.Tasks;
+using Mapster;
 
 namespace FarseerAgent.Infrastructure;
 
-[DependsOn(typeof(MapperModule), typeof(ElasticSearchModule), typeof(EventBusModule), typeof(TaskModule))]
+[DependsOn(typeof(ElasticSearchModule), typeof(TaskModule))]
 public class InfrastructureModule : FarseerModule
 {
     /// <summary>
@@ -28,5 +30,7 @@ public class InfrastructureModule : FarseerModule
         var containerLogQueue = new ContainerLogQueue();
         containerLogQueue.StartDequeue(cancellationToken: cts.Token);
         IocManager.Register(containerLogQueue);
+        
+        TypeAdapterConfig<ContainerLogDO, ContainerLogPO>.NewConfig().Unflattening(true);
     }
 }

@@ -1,11 +1,10 @@
 using FarseerAgent.Domain.LogCollect.ContainerLog;
-using FS.Extends;
-using FS.Mapper;
+using Mapster;
 using Nest;
 
 namespace FarseerAgent.Infrastructure.Repository.ContainerLog.Model;
 
-[Map(typeof(ContainerLogDO)), ElasticsearchType(IdProperty = "Id")]
+[ElasticsearchType(IdProperty = "Id")]
 public class ContainerLogPO
 {
     /// <summary>
@@ -60,7 +59,6 @@ public class ContainerLogPO
     ///     日志级别
     /// </summary>
     [Keyword]
-    [MapField(IsIgnore = true)]
     public string LogLevel { get; set; }
 
     /// <summary>
@@ -75,10 +73,5 @@ public class ContainerLogPO
     [Date]
     public DateTime CreateAt { get; set; }
 
-    public static implicit operator ContainerLogPO(ContainerLogDO log)
-    {
-        var po = log.Map<ContainerLogPO>();
-        po.LogLevel = log.LogLevel.ToString();
-        return po;
-    }
+    public static implicit operator ContainerLogPO(ContainerLogDO log) => log.Adapt<ContainerLogPO>();
 }

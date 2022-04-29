@@ -7,8 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Farseer.Net\Framework\Farseer.Net.Mapper\Farseer.Net.Mapper.csproj" />
       <ProjectReference Include="..\..\03_Domain\FarseerAgent.Domain.LogCollect\FarseerAgent.Domain.LogCollect.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Mapster" Version="7.3.0" />
+      <PackageReference Include="Mapster.Async" Version="2.0.0" />
     </ItemGroup>
 
 </Project>

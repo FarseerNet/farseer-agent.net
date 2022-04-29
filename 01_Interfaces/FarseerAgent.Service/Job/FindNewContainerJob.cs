@@ -14,11 +14,8 @@ public class FindNewContainerJob : IJob
 
     public async Task Execute(ITaskContext context)
     {
-        // 找到新的容器
-        var listContainers = await LogCollectApp.FindNewContainerAsync();
-
         // 解析并存储日志
-        foreach (var container in listContainers)
+        await foreach (var container in LogCollectApp.FindNewContainerAsync())
         {
             LogCollectApp.ReadLog(container);
         }

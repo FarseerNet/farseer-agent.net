@@ -1,14 +1,11 @@
 using FarseerAgent.Domain.LogCollect.Container;
-using FarseerAgent.Domain.LogCollect.Container.Entity;
-using FS.Extends;
-using FS.Mapper;
+using Mapster;
 
 namespace FarseerAgent.Application.LogCollect.Entity;
 
 /// <summary>
 ///     正在运行的容器
 /// </summary>
-[Map(typeof(ContainerDO))]
 public class ContainerDTO
 {
     /// <summary>
@@ -51,28 +48,5 @@ public class ContainerDTO
     /// </summary>
     public Dictionary<string, string> Env { get; set; }
 
-    public static implicit operator ContainerDO(ContainerDTO container)
-    {
-        var containerDo = container.Map<ContainerDO>();
-        containerDo.App = new ContainerAppVO
-        {
-            Name = container.AppName
-        };
-        containerDo.Node = new ContainerNodeVO
-        {
-            Name = container.NodeName,
-            Ip   = container.NodeIp
-        };
-        return containerDo;
-    }
-
-    /// <summary>
-    /// 类型转换
-    /// </summary>
-    public static readonly Action<ContainerDTO, ContainerDO> Do2DtoRule = (dto, do2) =>
-    {
-        dto.AppName  = do2.App.Name;
-        dto.NodeName = do2.Node.Name;
-        dto.NodeIp   = do2.Node.Ip;
-    };
+    public static implicit operator ContainerDO(ContainerDTO container) => container.Adapt<ContainerDO>();
 }
