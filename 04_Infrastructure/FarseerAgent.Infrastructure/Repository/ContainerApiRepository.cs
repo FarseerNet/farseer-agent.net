@@ -18,11 +18,17 @@ public class ContainerApiRepository : IContainerApiRepository
         var listContainers = await client.Containers.ListContainersAsync(new ContainersListParameters());
         foreach (var container in listContainers)
         {
+            Console.WriteLine($"{container.ID}");
+            Console.WriteLine($"{container.Names[0]}");
             // 元数据
+            Console.WriteLine("元数据");
             var inspectContainerAsync = await client.Containers.InspectContainerAsync(container.ID);
+            
             // 容器IP
+            Console.WriteLine("容器IP");
             inspectContainerAsync.NetworkSettings.Networks.TryGetValue("net", out var networks);
             // k8s的容器组名称
+            Console.WriteLine("k8s的容器组名称");
             inspectContainerAsync.Config.Labels.TryGetValue("io.kubernetes.container.name", out var k8sName);
             // 容器的启动入口名称(dotnet)
             if (inspectContainerAsync.Config.Entrypoint.Count == 2 && inspectContainerAsync.Config.Entrypoint[0] == "dotnet")
