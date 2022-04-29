@@ -10,7 +10,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Docker.DotNet\src\Docker.DotNet\Docker.DotNet.csproj" />
       <ProjectReference Include="..\..\..\Farseer.Net\Framework\Farseer.Net.Tasks\Farseer.Net.Tasks.csproj" />
       <ProjectReference Include="..\..\..\Farseer.Net\Framework\Farseer.Net\Farseer.Net.csproj" />
       <ProjectReference Include="..\..\02_Application\FarseerAgent.Application\FarseerAgent.Application.csproj" />
