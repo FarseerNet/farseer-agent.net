@@ -28,6 +28,7 @@ public class LogCollectApp : ISingletonDependency
             // 解析为本地的日志对象
             var log = ContainerLogService.Analysis(container, o);
             ContainerLogStorageRepository.Add(log);
+            Thread.Sleep(10); // 休眠一下
         }));
     }
 }
