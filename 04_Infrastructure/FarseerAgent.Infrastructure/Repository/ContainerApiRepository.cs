@@ -35,7 +35,7 @@ public class ContainerApiRepository : IContainerApiRepository
             Console.WriteLine("容器的启动入口名称");
             Console.WriteLine(inspectContainerAsync.Config            == null);
             Console.WriteLine(inspectContainerAsync.Config.Entrypoint == null);
-            if (inspectContainerAsync.Config.Entrypoint.Count == 2 && inspectContainerAsync.Config.Entrypoint[0] == "dotnet")
+            if (inspectContainerAsync.Config.Entrypoint?.Count == 2 && inspectContainerAsync.Config.Entrypoint[0] == "dotnet")
             {
                 k8sName = inspectContainerAsync.Config.Entrypoint[1];
                 if (k8sName.EndsWith(".dll")) k8sName = k8sName.Substring(0, k8sName.Length - 4);
