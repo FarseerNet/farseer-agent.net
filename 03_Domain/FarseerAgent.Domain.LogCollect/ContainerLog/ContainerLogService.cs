@@ -26,11 +26,13 @@ public class ContainerLogService : ISingletonDependency
         else if (logLower.Contains("warning")) logLevel = LogLevel.Warning;
         else if (logLower.Contains("debug")) logLevel   = LogLevel.Debug;
 
+        var logSpaceIndex = log.IndexOf(' ');
+
         return new ContainerLogDO
         {
             Id             = Encrypt.MD5(log),
             LogLevel       = logLevel,
-            Content        = log.Substring(log.IndexOf(' ')),
+            Content        = logSpaceIndex > 0 ? log.Substring(logSpaceIndex) : log,
             CreateAt       = create,
             AppName        = container.App.Name,
             ContainerEnv   = container.Env,
