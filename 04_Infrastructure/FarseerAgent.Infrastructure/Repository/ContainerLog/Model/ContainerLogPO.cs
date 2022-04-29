@@ -60,6 +60,7 @@ public class ContainerLogPO
     ///     日志级别
     /// </summary>
     [Keyword]
+    [MapField(IsIgnore = true)]
     public string LogLevel { get; set; }
 
     /// <summary>
