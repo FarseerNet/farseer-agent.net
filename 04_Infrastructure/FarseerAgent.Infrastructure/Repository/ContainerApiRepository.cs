@@ -32,11 +32,15 @@ public class ContainerApiRepository : IContainerApiRepository
             Console.WriteLine("k8s的容器组名称");
             inspectContainerAsync.Config.Labels.TryGetValue("io.kubernetes.container.name", out var k8sName);
             // 容器的启动入口名称(dotnet)
+            Console.WriteLine("容器的启动入口名称");
+            Console.WriteLine(inspectContainerAsync.Config            == null);
+            Console.WriteLine(inspectContainerAsync.Config.Entrypoint == null);
             if (inspectContainerAsync.Config.Entrypoint.Count == 2 && inspectContainerAsync.Config.Entrypoint[0] == "dotnet")
             {
                 k8sName = inspectContainerAsync.Config.Entrypoint[1];
                 if (k8sName.EndsWith(".dll")) k8sName = k8sName.Substring(0, k8sName.Length - 4);
             }
+            Console.WriteLine("yield return");
             yield return new ContainerDO
             {
                 Id    = container.ID,
