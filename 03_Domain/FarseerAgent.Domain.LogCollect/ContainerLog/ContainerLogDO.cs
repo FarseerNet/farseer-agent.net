@@ -1,3 +1,4 @@
+using FS.Mapper;
 using Microsoft.Extensions.Logging;
 
 namespace FarseerAgent.Domain.LogCollect.ContainerLog;
@@ -47,6 +48,7 @@ public class ContainerLogDO
     /// <summary>
     ///     日志级别
     /// </summary>
+    [MapField(IsIgnore = true)]
     public LogLevel LogLevel { get; set; }
 
     /// <summary>

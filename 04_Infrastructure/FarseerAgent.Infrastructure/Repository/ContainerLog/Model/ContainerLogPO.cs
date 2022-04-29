@@ -1,5 +1,4 @@
 using FarseerAgent.Domain.LogCollect.ContainerLog;
-using FS.Core.Mapping.Attribute;
 using FS.Extends;
 using FS.Mapper;
 using Nest;
