@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Docker.DotNet\src\Docker.DotNet\Docker.DotNet.csproj" />
+      <ProjectReference Include="..\..\..\Farseer.Net\Framework\Farseer.Net.ElasticSearch\Farseer.Net.ElasticSearch.csproj" />
+      <ProjectReference Include="..\..\..\Farseer.Net\Framework\Farseer.Net.EventBus\Farseer.Net.EventBus.csproj" />
+      <ProjectReference Include="..\..\..\Farseer.Net\Framework\Farseer.Net.Mapper\Farseer.Net.Mapper.csproj" />
+      <ProjectReference Include="..\..\..\Farseer.Net\Framework\Farseer.Net.Tasks\Farseer.Net.Tasks.csproj" />
+      <ProjectReference Include="..\..\..\Farseer.Net\Framework\Farseer.Net\Farseer.Net.csproj" />
+      <ProjectReference Include="..\..\03_Domain\FarseerAgent.Domain.LogCollect\FarseerAgent.Domain.LogCollect.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Castle.Windsor" Version="5.1.1" />
+    </ItemGroup>
+
+</Project>
