@@ -25,7 +25,7 @@ namespace FarseerAgent.Infrastructure.Repository.Queue
             }
             foreach (var containerLogPos in lst.GroupBy(o => o.ContainerEnv["farseer_logs"]))
             {
-                await IocManager.GetService<ContainerLogAgent>().AddAsync(containerLogPos.Key, lst);
+                await IocManager.GetService<ContainerLogAgent>().AddAsync(containerLogPos.Key, containerLogPos.ToList());
             }
         }
     }
