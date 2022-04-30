@@ -24,4 +24,8 @@
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Docker.DotNet" Version="3.125.5" />
+    </ItemGroup>
+
 </Project>
