@@ -12,7 +12,7 @@ public class ContainerLogStorageRepository : IContainerLogStorageRepository
     /// <summary>
     /// 代表已采集过的日志，当容器重启后，不需要再次采集
     /// </summary>
-    //private static ConcurrentDictionary<string, List<string>> ContainerLogId { get; set; } = new();
+    private static ConcurrentDictionary<string, List<string>> ContainerLogId { get; set; } = new();
 
     /// <summary>
     ///     将日志写入队列中
@@ -20,10 +20,10 @@ public class ContainerLogStorageRepository : IContainerLogStorageRepository
     public void Add(ContainerLogDO log)
     {
         var key = $"{log.AppName}_{log.ContainerIp}";
-        //if (!ContainerLogId.ContainsKey(key)) ContainerLogId.TryAdd(key, new List<string>());
+        if (!ContainerLogId.ContainsKey(key)) ContainerLogId.TryAdd(key, new List<string>());
         // 如果日志已采集过，则不用再放入队列
-        //if (ContainerLogId[key].Contains(log.Id)) return;
+        if (ContainerLogId[key].Contains(log.Id)) return;
         ContainerLogQueue.Enqueue(log);
-        //ContainerLogId[key].Add(log.Id);
+        ContainerLogId[key].Add(log.Id);
     }
 }

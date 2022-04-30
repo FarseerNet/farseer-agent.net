@@ -17,6 +17,7 @@ public class FindNewContainerJob : IJob
         // 解析并存储日志
         await foreach (var container in LogCollectApp.FindNewContainerAsync())
         {
+            Console.WriteLine($"foreach:{container.Id}");
             LogCollectApp.ReadLog(container);
         }
     }
