@@ -71,7 +71,7 @@ public class ContainerLogPO
     ///     日志时间
     /// </summary>
     [Date]
-    public DateTime CreateAt { get; set; }
+    public long CreateAt { get; set; }
 
     public static implicit operator ContainerLogPO(ContainerLogDO log) => log.Adapt<ContainerLogPO>();
 }
