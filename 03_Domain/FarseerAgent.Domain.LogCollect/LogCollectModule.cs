@@ -11,7 +11,6 @@ public class LogCollectModule : FarseerModule
     /// </summary>
     public override void Initialize()
     {
-        IocManager.RegisterAssemblyByConvention(type: GetType());
     }
 
     public override void PostInitialize()

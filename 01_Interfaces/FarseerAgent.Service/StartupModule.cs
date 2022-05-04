@@ -10,16 +10,5 @@ namespace FarseerAgent.Service
     [DependsOn(typeof(InfrastructureModule), typeof(ApplicationModule))] // 依赖Job模块
     public class StartupModule : FarseerModule
     {
-        public override void PreInitialize()
-        {
-        }
-
-        /// <summary>
-        ///     初始化
-        /// </summary>
-        public override void Initialize()
-        {
-            IocManager.RegisterAssemblyByConvention(type: GetType());
-        }
     }
 }

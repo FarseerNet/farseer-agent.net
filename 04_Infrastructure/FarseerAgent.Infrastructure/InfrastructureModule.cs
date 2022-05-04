@@ -1,4 +1,5 @@
-﻿using FarseerAgent.Domain.LogCollect.Container;
+﻿using FarseerAgent.Application.LogCollect.Entity;
+using FarseerAgent.Domain.LogCollect.Container;
 using FarseerAgent.Domain.LogCollect.ContainerLog;
 using FarseerAgent.Infrastructure.Repository.ContainerLog.Model;
 using FarseerAgent.Infrastructure.Repository.Queue;
@@ -25,12 +26,14 @@ public class InfrastructureModule : FarseerModule
     public override void Initialize()
     {
         IocManager.RegisterAssemblyByConvention(type: GetType());
+        
+        TypeAdapterConfig<ContainerDTO, ContainerDO>.NewConfig().Unflattening(true);
+        TypeAdapterConfig<ContainerLogDO, ContainerLogPO>.NewConfig().Unflattening(true);
 
         var cts               = new CancellationTokenSource();
         var containerLogQueue = new ContainerLogQueue();
         containerLogQueue.StartDequeue(cancellationToken: cts.Token);
         IocManager.Register(containerLogQueue);
         
-        TypeAdapterConfig<ContainerLogDO, ContainerLogPO>.NewConfig().Unflattening(true);
     }
 }
