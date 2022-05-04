@@ -1,13 +1,14 @@
 using System.Globalization;
 using System.Text.RegularExpressions;
 using FarseerAgent.Domain.LogCollect.Container;
+using FarseerAgent.Domain.LogCollect.ContainerLog;
 using FS.DI;
 using FS.Utils.Common;
 using Microsoft.Extensions.Logging;
 
-namespace FarseerAgent.Domain.LogCollect.ContainerLog;
+namespace FarseerAgent.Domain.LogCollect;
 
-public class ContainerLogService : ISingletonDependency
+public class ContainerLogAnalysisService : ISingletonDependency
 {
     /// <summary>
     /// 将字符串日志，转换成对象

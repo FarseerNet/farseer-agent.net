@@ -18,6 +18,6 @@ public class LogCollectModule : FarseerModule
         // 获取容器的主机信息
         var nodeInfoTask = FS.DI.IocManager.GetService<IContainerApiRepository>().GetNodeInfoAsync();
         Task.WhenAll(nodeInfoTask);
-        ContainerService.ContainerNode = nodeInfoTask.Result;
+        ContainerFindService.ContainerNode = nodeInfoTask.Result;
     }
 }
