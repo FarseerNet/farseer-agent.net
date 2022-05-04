@@ -26,14 +26,11 @@ public class InfrastructureModule : FarseerModule
     public override void Initialize()
     {
         IocManager.RegisterAssemblyByConvention(type: GetType());
-        
+
         TypeAdapterConfig<ContainerDTO, ContainerDO>.NewConfig().Unflattening(true);
         TypeAdapterConfig<ContainerLogDO, ContainerLogPO>.NewConfig().Unflattening(true);
 
-        var cts               = new CancellationTokenSource();
-        var containerLogQueue = new ContainerLogQueue();
-        containerLogQueue.StartDequeue(cancellationToken: cts.Token);
-        IocManager.Register(containerLogQueue);
-        
+        var cts = new CancellationTokenSource();
+        IocManager.Resolve<ContainerLogQueue>().StartDequeue(cancellationToken: cts.Token);
     }
 }

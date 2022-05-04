@@ -10,7 +10,7 @@ namespace FarseerAgent.Infrastructure.Repository.Queue
     /// </summary>
     public class ContainerLogQueue : BaseAsyncQueue<ContainerLogPO>, ISingletonDependency
     {
-        internal ContainerLogQueue() : base(maxQueueSize: 500000, callBackListCapacity: 1000, sleepMs: 500)
+        public ContainerLogQueue() : base(maxQueueSize: 500000, callBackListCapacity: 1000, sleepMs: 500)
         {
         }
 
