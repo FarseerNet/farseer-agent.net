@@ -23,6 +23,7 @@ public class ContainerFindService : ISingletonDependency
         var containers = ContainerApiRepository.FindRunningContainerAsync();
         await foreach (var containerDO in containers)
         {
+            if (containerDO.App.Name == "FarseerAgent.Service") continue;
             //if (!containerDO.Env.ContainsKey("farseer_logs"))
             containerDO.Node = ContainerNode;
             yield return containerDO;
