@@ -19,14 +19,14 @@ namespace FarseerAgent.Infrastructure.Repository.Queue
         /// </summary>
         protected override async Task OnDequeue(List<ContainerLogPO> lst, int remainCount)
         {
-            foreach (var containerLogPO in lst.Where(o => !o.ContainerEnv.ContainsKey("farseer_logs")))
-            {
-                containerLogPO.ContainerEnv.TryAdd("farseer_logs", "app_log");
-            }
-            foreach (var containerLogPos in lst.GroupBy(o => o.ContainerEnv["farseer_logs"]))
-            {
-                await IocManager.GetService<ContainerLogAgent>().AddAsync(containerLogPos.Key, containerLogPos.ToList());
-            }
+            // foreach (var containerLogPO in lst.Where(o => !o.ContainerEnv.ContainsKey("farseer_logs")))
+            // {
+            //     containerLogPO.ContainerEnv.TryAdd("farseer_logs", "app_log");
+            // }
+            // foreach (var containerLogPos in lst.GroupBy(o => o.ContainerEnv["farseer_logs"]))
+            // {
+            //     await IocManager.GetService<ContainerLogAgent>().AddAsync(containerLogPos.Key, containerLogPos.ToList());
+            // }
         }
     }
 }
