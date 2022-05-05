@@ -15,7 +15,6 @@ public class ContainerLogAnalysisService : ISingletonDependency
     /// </summary>
     public ContainerLogDO Analysis(ContainerDO container, string log)
     {
-        //Console.WriteLine($"{container.Name}：{log}");
         // 解析日期时间
         var time = Regex.Match(log.Split(' ')[0].Replace("T", " "), "[\\d-:\\s]+").Value;
         DateTime.TryParseExact(time, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out var create);

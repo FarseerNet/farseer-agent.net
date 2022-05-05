@@ -2,7 +2,7 @@ using FarseerAgent.Domain.LogCollect;
 using FarseerAgent.Domain.LogCollect.Container.Repository;
 using FS.DI;
 
-namespace FarseerAgent.Application.LogCollect;
+namespace FarseerAgent.Application;
 
 public class MonitorNewContainerApp : ISingletonDependency
 {
@@ -18,13 +18,13 @@ public class MonitorNewContainerApp : ISingletonDependency
     {
         await foreach (var containerDO in ContainerFindService.FindNewContainerAsync())
         {
-            ContainerReadLogService.Read(containerDO.Id, containerDO.Name, new Progress<string>(o =>
-            {
-                // 解析为本地的日志对象
-                var log = ContainerLogAnalysisService.Analysis(containerDO, o);
-                ContainerLogStorageRepository.Add(log);
-                Thread.Sleep(10); // 休眠一下
-            }));
+            // ContainerReadLogService.Read(containerDO.Id, containerDO.Name, new Progress<string>(o =>
+            // {
+            //     // 解析为本地的日志对象
+            //     var log = ContainerLogAnalysisService.Analysis(containerDO, o);
+            //     ContainerLogStorageRepository.Add(log);
+            //     Thread.Sleep(10); // 休眠一下
+            // }));
         }
     }
 }

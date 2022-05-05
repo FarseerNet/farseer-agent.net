@@ -1,3 +1,4 @@
+using FarseerAgent.Application;
 using FarseerAgent.Application.LogCollect;
 using FS.Core.Job;
 using FS.Tasks;
