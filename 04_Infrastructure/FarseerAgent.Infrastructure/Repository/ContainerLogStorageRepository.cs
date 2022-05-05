@@ -23,7 +23,7 @@ public class ContainerLogStorageRepository : IContainerLogStorageRepository
         if (!ContainerLogId.ContainsKey(key)) ContainerLogId.TryAdd(key, new List<string>());
         // 如果日志已采集过，则不用再放入队列
         if (ContainerLogId[key].Contains(log.Id)) return;
-        ContainerLogQueue.Enqueue(log);
+        //ContainerLogQueue.Enqueue(log);
         ContainerLogId[key].Add(log.Id);
     }
 }
