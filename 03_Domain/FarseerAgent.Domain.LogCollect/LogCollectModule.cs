@@ -1,6 +1,7 @@
-﻿using FarseerAgent.Domain.LogCollect.Container;
+﻿using System.Net.Sockets;
 using FarseerAgent.Domain.LogCollect.Container.Repository;
 using FS.Modules;
+using Microsoft.Extensions.Logging;
 
 namespace FarseerAgent.Domain.LogCollect;
 
@@ -15,9 +16,23 @@ public class LogCollectModule : FarseerModule
 
     public override void PostInitialize()
     {
-        // 获取容器的主机信息
-        var nodeInfoTask = FS.DI.IocManager.GetService<IContainerApiRepository>().GetNodeInfoAsync();
-        Task.WhenAll(nodeInfoTask);
-        ContainerFindService.ContainerNode = nodeInfoTask.Result;
+        try
+        {
+            // 获取容器的主机信息
+            var nodeInfoTask = FS.DI.IocManager.GetService<IContainerApiRepository>().GetNodeInfoAsync();
+            Task.WhenAll(nodeInfoTask);
+            ContainerFindService.ContainerNode = nodeInfoTask.Result;
+        }
+        catch (Exception e)
+        {
+            if (e.InnerException is
+                {
+                    Message: "Connection failed"
+                })
+            {
+                throw new Exception("容器连接失败。请检查容器daemon是否在运行。");
+            }
+            throw;
+        }
     }
 }
