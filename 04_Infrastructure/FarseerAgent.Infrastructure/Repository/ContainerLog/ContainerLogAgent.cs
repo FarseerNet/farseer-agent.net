@@ -11,6 +11,7 @@ public class ContainerLogAgent : ISingletonDependency
     /// </summary>
     public async Task<int> AddAsync(string indexName, List<ContainerLogPO> lstLog)
     {
+        return 0;
         await EsContext.Data.ContainerLogPO.SetName(indexName).InsertAsync(lst: lstLog);
         return lstLog.Count;
     }
