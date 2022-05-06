@@ -37,6 +37,6 @@ public class InfrastructureModule : FarseerModule
                                                          .Map(dest => dest.CreateAt,
                                                               src => src.CreateAt.ToTimestamps());
         var cts = new CancellationTokenSource();
-        IocManager.Resolve<ContainerLogQueue>().StartDequeue(cancellationToken: cts.Token);
+        //IocManager.Resolve<ContainerLogQueue>().StartDequeue(cancellationToken: cts.Token);
     }
 }
