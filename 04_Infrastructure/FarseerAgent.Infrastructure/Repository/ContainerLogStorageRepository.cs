@@ -23,6 +23,6 @@ public class ContainerLogStorageRepository : IContainerLogStorageRepository
         // 如果日志已采集过，则不用再放入队列
         if (ContainerLogId[log.ContainerId].Contains(log.Id)) return;
         //ContainerLogQueue.Enqueue(log);
-        //ContainerLogId[key].Add(log.Id);
+        ContainerLogId[log.ContainerId].Add(log.Id);
     }
 }
