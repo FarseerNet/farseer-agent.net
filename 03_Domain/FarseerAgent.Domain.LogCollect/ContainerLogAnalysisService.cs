@@ -35,6 +35,7 @@ public class ContainerLogAnalysisService : ISingletonDependency
             Content        = logSpaceIndex > 0 ? log.Substring(logSpaceIndex) : log,
             CreateAt       = create,
             AppName        = container.App.Name,
+            ContainerId    = container.Id,
             ContainerEnv   = container.Env,
             ContainerImage = container.Image,
             ContainerIp    = container.Ip,

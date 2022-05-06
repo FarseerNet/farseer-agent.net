@@ -20,6 +20,11 @@ public class ContainerLogDO
     public string ContainerName { get; set; }
 
     /// <summary>
+    ///     容器名称
+    /// </summary>
+    public string ContainerId { get; set; }
+
+    /// <summary>
     ///     镜像名称
     /// </summary>
     public string ContainerImage { get; set; }

@@ -19,10 +19,9 @@ public class ContainerLogStorageRepository : IContainerLogStorageRepository
     /// </summary>
     public void Add(ContainerLogDO log)
     {
-        var key = $"{log.AppName}_{log.ContainerIp}";
-        //if (!ContainerLogId.ContainsKey(key)) ContainerLogId.TryAdd(key, new List<string>());
+        if (!ContainerLogId.ContainsKey(log.ContainerId)) ContainerLogId.TryAdd(log.ContainerId, new List<string>());
         // 如果日志已采集过，则不用再放入队列
-        //if (ContainerLogId[key].Contains(log.Id)) return;
+        if (ContainerLogId[log.ContainerId].Contains(log.Id)) return;
         //ContainerLogQueue.Enqueue(log);
         //ContainerLogId[key].Add(log.Id);
     }
