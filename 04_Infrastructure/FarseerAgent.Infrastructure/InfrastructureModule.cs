@@ -5,12 +5,13 @@ using FarseerAgent.Infrastructure.Repository.ContainerLog.Model;
 using FS.ElasticSearch;
 using FS.Extends;
 using FS.Modules;
+using FS.MQ.Queue;
 using FS.Tasks;
 using Mapster;
 
 namespace FarseerAgent.Infrastructure;
 
-[DependsOn(typeof(ElasticSearchModule), typeof(TaskModule))]
+[DependsOn(typeof(ElasticSearchModule), typeof(QueueModule), typeof(TaskModule))]
 public class InfrastructureModule : FarseerModule
 {
     /// <summary>
@@ -31,7 +32,7 @@ public class InfrastructureModule : FarseerModule
         TypeAdapterConfig<ContainerLogDO, ContainerLogPO>.NewConfig().Unflattening(true)
                                                          .Map(dest => dest.CreateAt,
                                                               src => src.CreateAt.ToTimestamps());
-        
+
         TypeAdapterConfig<ContainerLogPO, ContainerLogDO>.NewConfig().Unflattening(true)
                                                          .Map(dest => dest.CreateAt,
                                                               src => src.CreateAt.ToTimestamps());

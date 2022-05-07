@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using FarseerAgent.Domain.LogCollect.Container.Repository;
 using FarseerAgent.Domain.LogCollect.ContainerLog;
+using FarseerAgent.Infrastructure.Repository.ContainerLog.Model;
 using FS.DI;
 using FS.MQ.Queue;
 
@@ -28,7 +29,7 @@ public class ContainerLogStorageRepository : IContainerLogStorageRepository
         // 如果日志已采集过，则不用再放入队列
         if (ContainerLogId[log.ContainerId].Contains(log.Id)) return;
 
-        _queueProduct.Send(log);
+        _queueProduct.Send((ContainerLogPO)log);
         ContainerLogId[log.ContainerId].Add(log.Id);
     }
 }
