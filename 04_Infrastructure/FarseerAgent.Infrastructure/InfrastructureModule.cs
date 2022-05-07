@@ -2,7 +2,6 @@
 using FarseerAgent.Domain.LogCollect.Container;
 using FarseerAgent.Domain.LogCollect.ContainerLog;
 using FarseerAgent.Infrastructure.Repository.ContainerLog.Model;
-using FarseerAgent.Infrastructure.Repository.Queue;
 using FS.ElasticSearch;
 using FS.Extends;
 using FS.Modules;
@@ -36,7 +35,5 @@ public class InfrastructureModule : FarseerModule
         TypeAdapterConfig<ContainerLogPO, ContainerLogDO>.NewConfig().Unflattening(true)
                                                          .Map(dest => dest.CreateAt,
                                                               src => src.CreateAt.ToTimestamps());
-        var cts = new CancellationTokenSource();
-        //IocManager.Resolve<ContainerLogQueue>().StartDequeue(cancellationToken: cts.Token);
     }
 }
