@@ -3,7 +3,6 @@ using System.Text.RegularExpressions;
 using FarseerAgent.Domain.LogCollect.Container;
 using FarseerAgent.Domain.LogCollect.ContainerLog;
 using FS.DI;
-using FS.Utils.Common;
 using Microsoft.Extensions.Logging;
 
 namespace FarseerAgent.Domain.LogCollect;

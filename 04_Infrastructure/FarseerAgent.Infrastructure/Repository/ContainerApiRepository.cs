@@ -121,6 +121,7 @@ public class ContainerApiRepository : IContainerApiRepository
             if (readResult.Count > 0)
             {
                 var responseLine = Encoding.UTF8.GetString(buffer, 0, readResult.Count);
+                Console.WriteLine(responseLine);
                 progress.Report(responseLine.Trim());
                 Thread.Sleep(10);
             }
