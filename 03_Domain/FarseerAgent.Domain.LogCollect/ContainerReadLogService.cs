@@ -6,7 +6,8 @@ namespace FarseerAgent.Domain.LogCollect;
 
 public class ContainerReadLogService : ISingletonDependency
 {
-    public IContainerApiRepository ContainerApiRepository { get; set; }
+    public IContainerApiRepository        ContainerApiRepository        { get; set; }
+    public IContainerLogStorageRepository ContainerLogStorageRepository { get; set; }
 
     /// <summary>
     /// 读取容器中的日志
@@ -18,8 +19,13 @@ public class ContainerReadLogService : ISingletonDependency
         try
         {
             ContainerFindService.MonitorContainer.Add(containerId);
+
+            var lastReadLogTime                         = ContainerLogStorageRepository.GetLastReadLogTime(containerId);
+            // 提前1S，避免日志丢失
+            if (lastReadLogTime > 1000) lastReadLogTime -= 1000;
+            
             // 调用仓储层的容器接口
-            await ContainerApiRepository.ReadLog(containerId, progress);
+            await ContainerApiRepository.ReadLog(containerId, lastReadLogTime, progress);
         }
         catch (Exception e)
         {

@@ -24,7 +24,7 @@ public class ContainerFindService : ISingletonDependency
         await foreach (var containerDO in containers)
         {
             if (containerDO.App.Name == "FarseerAgent.Service") continue;
-            //if (!containerDO.Env.ContainsKey("farseer_logs"))
+            //if (!containerDO.Env.ContainsKey("farseer_logs")) continue;
             containerDO.Node = ContainerNode;
             yield return containerDO;
         }

@@ -13,7 +13,7 @@ public interface IContainerLogStorageRepository : ISingletonDependency
     /// </summary>
     void Add(ContainerLogDO log);
     /// <summary>
-    /// 检查日志ID是否已采集过
+    /// 读取容器日志的最后读取时间
     /// </summary>
-    bool ExistsLogId(string containerId, string logId);
+    long GetLastReadLogTime(string containerId);
 }

@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using FarseerAgent.Domain.LogCollect.Container;
 using FarseerAgent.Domain.LogCollect.ContainerLog;
 using FS.DI;
+using FS.Utils.Common;
 using Microsoft.Extensions.Logging;
 
 namespace FarseerAgent.Domain.LogCollect;
@@ -29,6 +30,7 @@ public class ContainerLogAnalysisService : ISingletonDependency
 
         return new ContainerLogDO
         {
+            Id             = Encrypt.MD5(log),
             LogLevel       = logLevel,
             Content        = logSpaceIndex > 0 ? log.Substring(logSpaceIndex) : log,
             CreateAt       = create,

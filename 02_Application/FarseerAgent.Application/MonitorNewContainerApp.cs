@@ -21,13 +21,8 @@ public class MonitorNewContainerApp : ISingletonDependency
         {
             ContainerReadLogService.Read(containerDO.Id, containerDO.Name, new Progress<string>(o =>
             {
-                var logId = Encrypt.MD5(o);
-                if (ContainerLogStorageRepository.ExistsLogId(containerDO.Id, logId)) return;
-
                 // 解析为本地的日志对象
                 var log = ContainerLogAnalysisService.Analysis(containerDO, o);
-                log.Id = logId;
-                
                 ContainerLogStorageRepository.Add(log);
             }));
         }

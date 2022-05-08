@@ -92,7 +92,7 @@ public class ContainerApiRepository : IContainerApiRepository
     /// <summary>
     /// 读取日志
     /// </summary>
-    public async Task ReadLog(string id, Progress<string> progress)
+    public async Task ReadLog(string id, long lastReadLogTime, Progress<string> progress)
     {
         var logStream = await client.Containers.GetContainerLogsAsync(id, false, new ContainerLogsParameters
         {
@@ -100,6 +100,8 @@ public class ContainerApiRepository : IContainerApiRepository
             ShowStderr = false,
             Timestamps = true,
             Follow     = true,
+            Since      = lastReadLogTime.ToString()
+
         }, CancellationToken.None);
 
         await ReadOutputAsync(logStream, progress);
