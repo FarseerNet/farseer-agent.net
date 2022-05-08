@@ -35,10 +35,7 @@ public class ContainerLogStorageRepository : IContainerLogStorageRepository
     /// </summary>
     public void Add(ContainerLogDO log)
     {
-        // 如果日志已采集过，则不用再放入队列
-        if (!ContainerLogId.ContainsKey(log.ContainerId)) ContainerLogId.TryAdd(log.ContainerId, 0);
-
-        _queueProduct.Send((ContainerLogPO)log);
         ContainerLogId[log.ContainerId] = log.CreateAt.ToTimestamps();
+        _queueProduct.Send((ContainerLogPO)log);
     }
 }
