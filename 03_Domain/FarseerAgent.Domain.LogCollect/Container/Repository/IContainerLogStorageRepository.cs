@@ -12,4 +12,8 @@ public interface IContainerLogStorageRepository : ISingletonDependency
     ///     将日志写入队列中
     /// </summary>
     void Add(ContainerLogDO log);
+    /// <summary>
+    /// 检查日志ID是否已采集过
+    /// </summary>
+    bool ExistsLogId(string containerId, string logId);
 }

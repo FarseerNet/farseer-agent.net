@@ -25,11 +25,22 @@ public class ContainerLogStorageRepository : IContainerLogStorageRepository
     /// </summary>
     public void Add(ContainerLogDO log)
     {
-        if (!ContainerLogId.ContainsKey(log.ContainerId)) ContainerLogId.TryAdd(log.ContainerId, new List<string>());
-        // 如果日志已采集过，则不用再放入队列
-        if (ContainerLogId[log.ContainerId].Contains(log.Id)) return;
-
         _queueProduct.Send((ContainerLogPO)log);
         ContainerLogId[log.ContainerId].Add(log.Id);
+    }
+
+    /// <summary>
+    /// 检查日志ID是否已采集过
+    /// </summary>
+    public bool ExistsLogId(string containerId, string logId)
+    {
+        if (!ContainerLogId.ContainsKey(containerId))
+        {
+            ContainerLogId.TryAdd(containerId, new List<string>());
+            return false;
+        }
+
+        // 如果日志已采集过，则不用再放入队列
+        return ContainerLogId[containerId].Contains(logId);
     }
 }

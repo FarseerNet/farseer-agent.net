@@ -30,7 +30,6 @@ public class ContainerLogAnalysisService : ISingletonDependency
 
         return new ContainerLogDO
         {
-            Id             = Encrypt.MD5(log),
             LogLevel       = logLevel,
             Content        = logSpaceIndex > 0 ? log.Substring(logSpaceIndex) : log,
             CreateAt       = create,
