@@ -122,7 +122,7 @@ public class ContainerApiRepository : IContainerApiRepository
             {
                 var responseLine = Encoding.UTF8.GetString(buffer, 0, readResult.Count);
                 progress.Report(responseLine.Trim());
-                Thread.Sleep(5);
+                Thread.Sleep(10);
             }
             else
             {
