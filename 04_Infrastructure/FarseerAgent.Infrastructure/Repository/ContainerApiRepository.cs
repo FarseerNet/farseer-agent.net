@@ -75,24 +75,24 @@ public class ContainerApiRepository : IContainerApiRepository
         };
     }
 
-    /// <summary>
-    /// 读取日志
-    /// </summary>
-    public Task ReadLog(string id, Progress<string> progress)
-    {
-        return client.Containers.GetContainerLogsAsync(id, new ContainerLogsParameters
-        {
-            ShowStdout = true,
-            ShowStderr = false,
-            Timestamps = true,
-            Follow     = true,
-        }, CancellationToken.None, progress);
-    }
+    // /// <summary>
+    // /// 读取日志
+    // /// </summary>
+    // public Task ReadLog(string id, Progress<string> progress)
+    // {
+    //     return client.Containers.GetContainerLogsAsync(id, new ContainerLogsParameters
+    //     {
+    //         ShowStdout = true,
+    //         ShowStderr = false,
+    //         Timestamps = true,
+    //         Follow     = true,
+    //     }, CancellationToken.None, progress);
+    // }
 
     /// <summary>
     /// 读取日志
     /// </summary>
-    public async Task ReadLog(string id)
+    public async Task ReadLog(string id, Progress<string> progress)
     {
         var logStream = await client.Containers.GetContainerLogsAsync(id, false, new ContainerLogsParameters
         {
@@ -102,32 +102,27 @@ public class ContainerApiRepository : IContainerApiRepository
             Follow     = true,
         }, CancellationToken.None);
 
-        await ReadOutputAsync(logStream);
+        await ReadOutputAsync(logStream, progress);
     }
 
     /// <summary>
     /// 读取日志流
     /// </summary>
-    private async Task ReadOutputAsync(MultiplexedStream multiplexedStream, CancellationToken cancellationToken = default)
+    private async Task ReadOutputAsync(MultiplexedStream multiplexedStream, IProgress<string> progress, CancellationToken cancellationToken = default)
     {
-        byte[] buffer = System.Buffers.ArrayPool<byte>.Shared.Rent(81920);
+        var buffer = System.Buffers.ArrayPool<byte>.Shared.Rent(81920);
 
         while (true)
         {
             Array.Clear(buffer, 0, buffer.Length);
+            var readResult = await multiplexedStream.ReadOutputAsync(buffer, 0, buffer.Length, cancellationToken);
 
-            MultiplexedStream.ReadResult readResult = await multiplexedStream.ReadOutputAsync(buffer, 0, buffer.Length, cancellationToken);
-
-            if (readResult.EOF)
-            {
-                break;
-            }
-
+            if (readResult.EOF) break;
             if (readResult.Count > 0)
             {
                 var responseLine = Encoding.UTF8.GetString(buffer, 0, readResult.Count);
-
-                Console.WriteLine(responseLine.Trim());
+                progress.Report(responseLine.Trim());
+                Thread.Sleep(5);
             }
             else
             {

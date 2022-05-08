@@ -29,7 +29,7 @@ public class ContainerLogStorageRepository : IContainerLogStorageRepository
         // 如果日志已采集过，则不用再放入队列
         if (ContainerLogId[log.ContainerId].Contains(log.Id)) return;
 
-        //_queueProduct.Send((ContainerLogPO)log);
+        _queueProduct.Send((ContainerLogPO)log);
         ContainerLogId[log.ContainerId].Add(log.Id);
     }
 }

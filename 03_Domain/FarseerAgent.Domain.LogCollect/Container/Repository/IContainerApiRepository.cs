@@ -17,10 +17,6 @@ public interface IContainerApiRepository : ISingletonDependency
     /// </summary>
     Task ReadLog(string id, Progress<string> progress);
     /// <summary>
-    /// 读取日志
-    /// </summary>
-    Task ReadLog(string id);
-    /// <summary>
     /// 获取容器宿主的信息
     /// </summary>
     Task<ContainerNodeVO> GetNodeInfoAsync();
