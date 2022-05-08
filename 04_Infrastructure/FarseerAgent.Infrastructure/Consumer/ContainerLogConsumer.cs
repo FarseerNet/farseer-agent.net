@@ -27,6 +27,6 @@ namespace FarseerAgent.Infrastructure.Consumer
             return true;
         }
         
-        public Task<bool> FailureHandling(List<object> messages) => throw new NotImplementedException();
+        public Task<bool> FailureHandling(List<object> messages) => Task.FromResult(false);
     }
 }
