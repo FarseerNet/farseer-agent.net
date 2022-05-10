@@ -20,10 +20,10 @@ public class ContainerReadLogService : ISingletonDependency
         {
             ContainerFindService.MonitorContainer.Add(containerId);
 
-            var lastReadLogTime                         = ContainerLogStorageRepository.GetLastReadLogTime(containerId);
+            var lastReadLogTime = ContainerLogStorageRepository.GetLastReadLogTime(containerId);
             // 提前1S，避免日志丢失
             if (lastReadLogTime > 1000) lastReadLogTime -= 1000;
-            
+
             // 调用仓储层的容器接口
             await ContainerApiRepository.ReadLog(containerId, lastReadLogTime, progress);
         }
