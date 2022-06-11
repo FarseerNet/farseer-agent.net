@@ -1,6 +1,6 @@
 using FarseerAgent.Application;
-using FarseerAgent.Application.LogCollect;
-using FS.Core.Job;
+using FS.Core.Abstract.Fss;
+using FS.Core.Abstract.Tasks;
 using FS.Tasks;
 
 namespace FarseerAgent.Service.Job;

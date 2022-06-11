@@ -1,7 +1,6 @@
 using FarseerAgent.Domain.LogCollect;
 using FarseerAgent.Domain.LogCollect.Container.Repository;
 using FS.DI;
-using FS.Utils.Common;
 
 namespace FarseerAgent.Application;
 

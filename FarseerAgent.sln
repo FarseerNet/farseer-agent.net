@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farseer.Net.ElasticSearch",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farseer.Net.MQ.Queue", "..\Farseer.Net\Framework\Farseer.Net.MQ.Queue\Farseer.Net.MQ.Queue.csproj", "{C9AAD35E-1179-4179-9AAB-DBD7151BBB51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farseer.Net.Mapper", "..\Farseer.Net\Framework\Farseer.Net.Mapper\Farseer.Net.Mapper.csproj", "{36BAFC61-FD03-4711-BFCD-55DC3293B3A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +88,10 @@ Global
 		{C9AAD35E-1179-4179-9AAB-DBD7151BBB51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9AAD35E-1179-4179-9AAB-DBD7151BBB51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9AAD35E-1179-4179-9AAB-DBD7151BBB51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36BAFC61-FD03-4711-BFCD-55DC3293B3A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36BAFC61-FD03-4711-BFCD-55DC3293B3A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36BAFC61-FD03-4711-BFCD-55DC3293B3A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36BAFC61-FD03-4711-BFCD-55DC3293B3A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D42E3B97-F5C5-4048-A142-5EAEED7294B0} = {9445E265-4FB7-4A54-93F0-2E95DC6326B2}
@@ -99,5 +105,6 @@ Global
 		{C78DFE8F-F43A-4053-A65C-D551CB6ABB68} = {8CAC111D-89EF-40C4-A208-4F05BC7A6351}
 		{EFDA0DEA-81BF-427B-913E-3FEAE7A492A7} = {8CAC111D-89EF-40C4-A208-4F05BC7A6351}
 		{C9AAD35E-1179-4179-9AAB-DBD7151BBB51} = {8CAC111D-89EF-40C4-A208-4F05BC7A6351}
+		{36BAFC61-FD03-4711-BFCD-55DC3293B3A2} = {8CAC111D-89EF-40C4-A208-4F05BC7A6351}
 	EndGlobalSection
 EndGlobal

@@ -9,9 +9,8 @@ public class ContainerLogAgent : ISingletonDependency
     /// <summary>
     ///     写入ES或数据库
     /// </summary>
-    public async Task<int> AddAsync(string indexName, List<ContainerLogPO> lstLog)
+    public Task AddAsync(string indexName, IEnumerable<ContainerLogPO> lstLog)
     {
-        await EsContext.Data.ContainerLogPO.SetName(indexName).InsertAsync(lst: lstLog);
-        return lstLog.Count;
+        return EsContext.Data.ContainerLogPO.SetName(indexName).InsertAsync(lstLog);
     }
 }

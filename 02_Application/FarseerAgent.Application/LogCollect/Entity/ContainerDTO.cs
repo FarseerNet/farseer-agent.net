@@ -1,5 +1,5 @@
 using FarseerAgent.Domain.LogCollect.Container;
-using Mapster;
+using FS.Extends;
 
 namespace FarseerAgent.Application.LogCollect.Entity;
 
@@ -48,5 +48,5 @@ public class ContainerDTO
     /// </summary>
     public Dictionary<string, string> Env { get; set; }
 
-    public static implicit operator ContainerDO(ContainerDTO container) => container.Adapt<ContainerDO>();
+    public static implicit operator ContainerDO(ContainerDTO container) => container.Map<ContainerDO>();
 }

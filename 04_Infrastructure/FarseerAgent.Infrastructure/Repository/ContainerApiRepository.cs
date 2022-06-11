@@ -31,15 +31,17 @@ public class ContainerApiRepository : IContainerApiRepository
                 k8sName = inspectContainerAsync.Config.Entrypoint[1];
                 if (k8sName.EndsWith(".dll")) k8sName = k8sName.Substring(0, k8sName.Length - 4);
             }
+
+            var containerName = container.Names.FirstOrDefault().Substring(1);
             yield return new ContainerDO
             {
                 Id    = container.ID,
-                Name  = container.Names.FirstOrDefault().Substring(1),
+                Name  = containerName,
                 Image = inspectContainerAsync.Config.Image,
                 Ip    = networks?.IPAddress,
                 App = new ContainerAppVO
                 {
-                    Name = k8sName ?? container.Names.FirstOrDefault().Substring(1)
+                    Name = k8sName ?? containerName
                 },
                 Env = inspectContainerAsync.Config.Env?.ToDictionary(o => o.Split('=')[0],
                                                                      o => o.Split('=')[1]),

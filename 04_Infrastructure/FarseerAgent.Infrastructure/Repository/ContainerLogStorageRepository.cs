@@ -2,9 +2,9 @@ using System.Collections.Concurrent;
 using FarseerAgent.Domain.LogCollect.Container.Repository;
 using FarseerAgent.Domain.LogCollect.ContainerLog;
 using FarseerAgent.Infrastructure.Repository.ContainerLog.Model;
+using FS.Core.Abstract.MQ.Queue;
 using FS.DI;
 using FS.Extends;
-using FS.MQ.Queue;
 
 namespace FarseerAgent.Infrastructure.Repository;
 
@@ -13,7 +13,7 @@ public class ContainerLogStorageRepository : IContainerLogStorageRepository
     readonly IQueueProduct _queueProduct;
     public ContainerLogStorageRepository()
     {
-        _queueProduct = IocManager.GetService<IQueueManager>(name: "ContainerLog").Product;
+        _queueProduct = IocManager.GetService<IQueueProduct>(name: "ContainerLog");
     }
 
     /// <summary>

@@ -1,7 +1,5 @@
-﻿using System.Net.Sockets;
-using FarseerAgent.Domain.LogCollect.Container.Repository;
+﻿using FarseerAgent.Domain.LogCollect.Container.Repository;
 using FS.Modules;
-using Microsoft.Extensions.Logging;
 
 namespace FarseerAgent.Domain.LogCollect;
 
